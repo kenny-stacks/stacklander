@@ -18,49 +18,18 @@ export default function Home() {
             transition={{ delay: 0.2 }}
             className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 mb-6"
           >
-            🎮 Stacklander
+            ⚔️ Stacklander
           </motion.h1>
           
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
-            className="text-2xl text-gray-700 mb-8"
+            className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600 mb-2"
           >
-            Real-time multiplayer trivia about Stacks blockchain!
+            There Can Be Only One!
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"
-          >
-            <div className="bg-gradient-to-br from-purple-100 to-pink-100 p-6 rounded-2xl">
-              <div className="text-4xl mb-3">🎯</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Fast-Paced</h3>
-              <p className="text-gray-600">Answer questions quickly to earn more points!</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-blue-100 to-cyan-100 p-6 rounded-2xl">
-              <div className="text-4xl mb-3">🏆</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Competitive</h3>
-              <p className="text-gray-600">Climb the leaderboard in real-time!</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-green-100 to-emerald-100 p-6 rounded-2xl">
-              <div className="text-4xl mb-3">📚</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Educational</h3>
-              <p className="text-gray-600">Learn about PoX, Clarity, sBTC & more!</p>
-            </div>
-
-            <div className="bg-gradient-to-br from-orange-100 to-yellow-100 p-6 rounded-2xl">
-              <div className="text-4xl mb-3">✨</div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">Fun</h3>
-              <p className="text-gray-600">Whimsical animations and celebrations!</p>
-            </div>
-          </motion.div>
-
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
