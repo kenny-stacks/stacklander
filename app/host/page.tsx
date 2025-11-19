@@ -10,10 +10,12 @@ type GameState = 'AUTH' | 'LOBBY' | 'COUNTDOWN' | 'QUESTION' | 'RESULTS' | 'FINI
 
 interface PlayerInfo {
   id: string;
+  name: string;
   stacksAddress: string;
 }
 
 interface LeaderboardEntry {
+  name: string;
   stacksAddress: string;
   score: number;
   rank: number;
@@ -174,9 +176,10 @@ export default function HostPage() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.1 }}
-                      className="bg-gradient-to-r from-blue-100 to-cyan-100 p-4 rounded-xl font-mono text-lg text-gray-900"
+                      className="bg-gradient-to-r from-blue-100 to-cyan-100 p-4 rounded-xl text-gray-900"
                     >
-                      {player.stacksAddress}
+                      <div className="font-bold text-xl mb-1">{player.name}</div>
+                      <div className="font-mono text-sm text-gray-600">{player.stacksAddress}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -257,14 +260,19 @@ export default function HostPage() {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: idx * 0.2 }}
-                    className={`p-8 rounded-2xl font-bold text-2xl flex justify-between items-center ${
-                      idx === 0 ? 'bg-gradient-to-r from-yellow-300 to-yellow-400 text-yellow-900 text-3xl' :
+                    className={`p-8 rounded-2xl flex justify-between items-center ${
+                      idx === 0 ? 'bg-gradient-to-r from-yellow-300 to-yellow-400 text-yellow-900' :
                       idx === 1 ? 'bg-gradient-to-r from-gray-300 to-gray-400 text-gray-900' :
                       'bg-gradient-to-r from-orange-300 to-orange-400 text-orange-900'
                     }`}
                   >
-                    <span>{idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉'} {entry.stacksAddress}</span>
-                    <span>{entry.score.toFixed(0)} pts</span>
+                    <div>
+                      <div className={`font-bold ${idx === 0 ? 'text-3xl' : 'text-2xl'}`}>
+                        {idx === 0 ? '🥇' : idx === 1 ? '🥈' : '🥉'} {entry.name}
+                      </div>
+                      <div className="font-mono text-sm opacity-75">{entry.stacksAddress}</div>
+                    </div>
+                    <span className={`font-bold ${idx === 0 ? 'text-3xl' : 'text-2xl'}`}>{entry.score.toFixed(0)}</span>
                   </motion.div>
                 ))}
               </div>

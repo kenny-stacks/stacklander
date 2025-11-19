@@ -10,10 +10,12 @@ type GameState = 'JOIN' | 'LOBBY' | 'COUNTDOWN' | 'QUESTION' | 'WAITING' | 'RESU
 
 interface PlayerInfo {
   id: string;
+  name: string;
   stacksAddress: string;
 }
 
 interface LeaderboardEntry {
+  name: string;
   stacksAddress: string;
   score: number;
   rank: number;
@@ -24,6 +26,7 @@ export default function GamePage() {
   const sessionId = params.sessionId as string;
 
   const [gameState, setGameState] = useState<GameState>('JOIN');
+  const [name, setName] = useState('');
   const [stacksAddress, setStacksAddress] = useState('');
   const [players, setPlayers] = useState<PlayerInfo[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState<{ text: string; options: string[] } | null>(null);
@@ -102,13 +105,17 @@ export default function GamePage() {
   }, [gameState, timeLeft, selectedAnswer]);
 
   const handleJoinGame = () => {
+    if (!name.trim()) {
+      setError('Please enter your name');
+      return;
+    }
     if (!stacksAddress.trim()) {
       setError('Please enter your Stacks address');
       return;
     }
 
     const socket = getSocket();
-    socket.emit('join-game', { sessionId, stacksAddress }, (response: any) => {
+    socket.emit('join-game', { sessionId, name, stacksAddress }, (response: any) => {
       if (response.error) {
         setError(response.error);
         return;
@@ -164,6 +171,14 @@ export default function GamePage() {
               <div className="space-y-4">
                 <input
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter your name"
+                  className="w-full px-4 py-3 text-lg text-gray-900 placeholder:text-gray-500 border-4 border-purple-300 rounded-xl focus:outline-none focus:border-purple-500"
+                  onKeyDown={(e) => e.key === 'Enter' && handleJoinGame()}
+                />
+                <input
+                  type="text"
                   value={stacksAddress}
                   onChange={(e) => setStacksAddress(e.target.value)}
                   placeholder="Enter your Stacks address"
@@ -200,13 +215,14 @@ export default function GamePage() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.1 }}
-                      className={`p-3 rounded-xl font-mono text-gray-900 ${
+                      className={`p-3 rounded-xl text-gray-900 ${
                         player.stacksAddress === stacksAddress
                           ? 'bg-gradient-to-r from-purple-200 to-pink-200 font-bold'
                           : 'bg-gray-100'
                       }`}
                     >
-                      {player.stacksAddress}
+                      <div className="font-bold text-lg">{player.name}</div>
+                      <div className="font-mono text-sm text-gray-600">{player.stacksAddress}</div>
                     </motion.div>
                   ))}
                 </div>
@@ -340,8 +356,11 @@ export default function GamePage() {
                         'bg-gray-100'
                     }`}
                   >
-                    <span className="font-mono">#{entry.rank} {entry.stacksAddress}</span>
-                    <span className="font-bold">{entry.score.toFixed(0)}</span>
+                    <div>
+                      <div className="font-bold text-lg">#{entry.rank} {entry.name}</div>
+                      <div className="font-mono text-sm text-gray-600">{entry.stacksAddress}</div>
+                    </div>
+                    <span className="font-bold text-2xl">{entry.score.toFixed(0)}</span>
                   </motion.div>
                 ))}
               </div>

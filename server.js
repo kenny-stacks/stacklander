@@ -83,7 +83,7 @@ app.prepare().then(() => {
     });
 
     socket.on('join-game', (data, callback) => {
-      const { sessionId, stacksAddress } = data;
+      const { sessionId, name, stacksAddress } = data;
       
       const session = gameManager.getSession(sessionId);
       if (!session) {
@@ -96,7 +96,7 @@ app.prepare().then(() => {
         return;
       }
 
-      const player = gameManager.addPlayer(sessionId, socket.id, stacksAddress);
+      const player = gameManager.addPlayer(sessionId, socket.id, name, stacksAddress);
       if (!player) {
         callback({ error: 'Could not join game' });
         return;
@@ -106,6 +106,7 @@ app.prepare().then(() => {
       
       const players = Array.from(session.players.values()).map(p => ({
         id: p.id,
+        name: p.name,
         stacksAddress: p.stacksAddress,
       }));
 
@@ -113,6 +114,7 @@ app.prepare().then(() => {
         players,
         newPlayer: {
           id: player.id,
+          name: player.name,
           stacksAddress: player.stacksAddress,
         }
       });

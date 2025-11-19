@@ -27,12 +27,13 @@ class GameManager {
     return this.sessions.get(sessionId);
   }
 
-  addPlayer(sessionId: string, playerId: string, stacksAddress: string): Player | null {
+  addPlayer(sessionId: string, playerId: string, name: string, stacksAddress: string): Player | null {
     const session = this.sessions.get(sessionId);
     if (!session || session.state !== 'LOBBY') return null;
 
     const player: Player = {
       id: playerId,
+      name,
       stacksAddress,
       score: 0,
       answers: [],
@@ -108,6 +109,7 @@ class GameManager {
 
     const leaderboard = Array.from(session.players.values())
       .map(player => ({
+        name: player.name,
         stacksAddress: player.stacksAddress,
         score: player.score,
       }))

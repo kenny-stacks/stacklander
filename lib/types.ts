@@ -10,6 +10,7 @@ export interface Question {
 
 export interface Player {
   id: string;
+  name: string;
   stacksAddress: string;
   score: number;
   answers: PlayerAnswer[];
@@ -36,6 +37,7 @@ export interface GameSession {
 }
 
 export interface LeaderboardEntry {
+  name: string;
   stacksAddress: string;
   score: number;
   rank: number;
