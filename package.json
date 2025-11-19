@@ -8,6 +8,9 @@
     "start": "NODE_ENV=production tsx server.js",
     "lint": "eslint"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "framer-motion": "^12.23.24",
     "nanoid": "^5.1.6",
