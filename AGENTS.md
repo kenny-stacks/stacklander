@@ -47,13 +47,13 @@
 ## Scoring Algorithm
 ```
 basePoints = 100
-timeSeconds = floor(timeMs / 1000)
-timeBonus = max(100 - (timeSeconds * 10), 0)
+timeBonus = max(100 - floor(timeMs / 100), 0)
 points = correct ? basePoints + timeBonus : 0
 ```
 - Questions auto-advance after 10 seconds
-- Time bonus decreases by 10 points per second
+- Time bonus decreases by 1 point per 100ms (0-100 bonus)
 - Maximum score per question: 200 points (100 base + 100 bonus for instant answer)
+- Millisecond precision reduces likelihood of ties
 
 ## Tech Stack
 - Next.js 16 (App Router, Turbopack)

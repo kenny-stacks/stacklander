@@ -66,11 +66,10 @@ class GameManager {
     const correct = answerIndex === currentQuestion.correctAnswer;
     
     const basePoints = 100;
-    const timeSeconds = Math.floor(timeMs / 1000);
-    const timeBonus = Math.max(100 - (timeSeconds * 10), 0);
+    const timeBonus = Math.max(100 - Math.floor(timeMs / 100), 0);
     const points = correct ? basePoints + timeBonus : 0;
 
-    console.log(`Answer submitted: timeMs=${timeMs}, timeSeconds=${timeSeconds}, timeBonus=${timeBonus}, total points=${points}`);
+    console.log(`Answer submitted: timeMs=${timeMs}, timeBonus=${timeBonus}, total points=${points}`);
 
     player.answers.push({
       questionId: currentQuestion.id,
