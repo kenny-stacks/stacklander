@@ -254,28 +254,28 @@ export default function GamePage() {
               initial={{ opacity: 0, rotateY: 90 }}
               animate={{ opacity: 1, rotateY: 0 }}
               exit={{ opacity: 0, rotateY: -90 }}
-              className="bg-white rounded-3xl p-8 shadow-2xl mt-8"
+              className="bg-white rounded-2xl p-4 shadow-2xl mt-4"
             >
-              <div className="text-center mb-6">
-                <p className="text-lg text-gray-600 mb-2">Question {questionNumber}</p>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">{currentQuestion.text}</h2>
+              <div className="text-center mb-3">
+                <p className="text-sm text-gray-600 mb-1">Question {questionNumber}</p>
+                <h2 className="text-lg font-bold text-gray-800 mb-3">{currentQuestion.text}</h2>
                 
                 {selectedAnswer === null && (
                   <motion.div 
-                    className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-2xl p-4 mb-4"
+                    className="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-2 mb-3"
                     animate={{ scale: timeLeft <= 3 ? [1, 1.05, 1] : 1 }}
                     transition={{ repeat: timeLeft <= 3 ? Infinity : 0, duration: 0.5 }}
                   >
-                    <p className="text-sm text-gray-600 mb-1">Time Bonus</p>
-                    <p className={`text-5xl font-bold ${timeLeft <= 3 ? 'text-red-500' : 'text-purple-600'}`}>
+                    <p className="text-xs text-gray-600">Time Bonus</p>
+                    <p className={`text-3xl font-bold ${timeLeft <= 3 ? 'text-red-500' : 'text-purple-600'}`}>
                       +{potentialBonus}
                     </p>
-                    <p className="text-sm text-gray-600 mt-1">{timeLeft}s remaining</p>
+                    <p className="text-xs text-gray-600">{timeLeft}s</p>
                   </motion.div>
                 )}
               </div>
 
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-2">
                 {currentQuestion.options.map((option, idx) => (
                   <motion.button
                     key={idx}
@@ -283,13 +283,13 @@ export default function GamePage() {
                     whileTap={{ scale: 0.98 }}
                     onClick={() => handleAnswerClick(idx)}
                     disabled={selectedAnswer !== null}
-                    className={`p-6 rounded-2xl text-left font-bold text-lg transition-all ${
+                    className={`p-3 rounded-xl text-left font-bold text-sm transition-all ${
                       selectedAnswer === idx
                         ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
                         : 'bg-gradient-to-r from-blue-100 to-purple-100 hover:from-blue-200 hover:to-purple-200 text-gray-900'
                     } disabled:cursor-not-allowed`}
                   >
-                    <span className="text-2xl mr-3">{String.fromCharCode(65 + idx)}</span>
+                    <span className="text-lg mr-2">{String.fromCharCode(65 + idx)}</span>
                     {option}
                   </motion.button>
                 ))}
