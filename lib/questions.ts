@@ -80,7 +80,7 @@ export const questions: Question[] = [
       'No, they are completely separate',
       'Yes, Clarity can read Bitcoin state',
       'Only if you pay extra fees',
-      'Only during testnet'
+      'Only on testnet'
     ],
     correctAnswer: 1,
     category: 'Clarity'
@@ -99,7 +99,7 @@ export const questions: Question[] = [
   },
   {
     id: 'q9',
-    text: 'What percentage of stacked STX must sign blocks after Nakamoto?',
+    text: 'What percentage of Stacks signers must sign blocks after Nakamoto?',
     options: [
       '51%',
       '66%',
@@ -111,14 +111,14 @@ export const questions: Question[] = [
   },
   {
     id: 'q10',
-    text: 'What does it mean that Clarity is non-Turing complete?',
+    text: 'What smart contract vulnerability is not possible in Clarity?',
     options: [
-      'It runs faster than other smart contract languages',
-      'It has no unbounded loops',
-      'It can only run on Bitcoin',
-      'It requires special hardware to execute'
+      'Reentrancy attacks',
+      'Front-running',
+      'Logic errors',
+      'Authorization bugs'
     ],
-    correctAnswer: 1,
+    correctAnswer: 0,
     category: 'Clarity'
   }
 ];
